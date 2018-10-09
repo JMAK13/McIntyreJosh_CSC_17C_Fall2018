@@ -27,6 +27,7 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare All Variables and Initialize Here
+    SimpleVector<int> v2(9);
     SimpleVector<int> v(9);
     
     //Print Vector Values

@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=csc17a_lab4_part2
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/csc17a_lab4_part2
+CND_ARTIFACT_NAME_Debug=csc17c_lab4_part2
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/csc17c_lab4_part2
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=csc17alab4part2.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/csc17alab4part2.tar
+CND_PACKAGE_NAME_Debug=csc17clab4part2.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/csc17clab4part2.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=csc17a_lab4_part2
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/csc17a_lab4_part2
+CND_ARTIFACT_NAME_Release=csc17c_lab4_part2
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/csc17c_lab4_part2
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=csc17alab4part2.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/csc17alab4part2.tar
+CND_PACKAGE_NAME_Release=csc17clab4part2.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/csc17clab4part2.tar
 #
 # include compiler specific variables
 #

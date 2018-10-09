@@ -66,7 +66,6 @@ SimpleVector<T>::SimpleVector(int s)
         Link<T> *prev=start;
         do{
             Link<T> *end=new Link<T>(rand()%90+10);
-            end->setNext(NULL);
             prev->setNext(end);
             prev=end;
             tmp--;
@@ -83,7 +82,6 @@ SimpleVector<T>::SimpleVector(int s)
 // Copy Constructor for SimpleVector class. *
 //*******************************************
 
-//NOTE--> Gives Error in Pop Function !!!!!!!!!!!!!!!!!!!!!
 template <class T>
 SimpleVector<T>::SimpleVector(const SimpleVector &obj)
 {
@@ -91,7 +89,16 @@ SimpleVector<T>::SimpleVector(const SimpleVector &obj)
     arraySize = obj.arraySize;
     
     //Copy Vector
-    start=obj.start;
+    start=new Link<T>(obj.start->getValue());
+    
+    Link<T> *tmp=start;
+    Link<T> *tmp2=obj.start;
+    while(tmp2->getNext()){
+        Link<T> *newLnk=new Link<T>(tmp2->getNext()->getValue());
+        tmp->setNext(newLnk);
+        tmp=tmp->getNext();
+        tmp2=tmp2->getNext();
+    }
     
     if (start == 0)
         memError();
@@ -182,24 +189,11 @@ T &SimpleVector<T>::operator[](const int &sub)
 
 template <class T>
 void SimpleVector<T>::push(T val){
-    Link<T> *tmp=start;
     
+    Link<T> *newLnk=new Link<T>(val);
+    newLnk->setNext(start);
+    start=newLnk;
     arraySize++;
-    T tmp2[arraySize]={};
-    
-    for(int i=0; i<arraySize-1; i++){
-        tmp2[i+1]=tmp->getValue();
-        tmp=tmp->getNext();
-    }
-    
-    tmp=start;
-    
-    for(int i=0; i<arraySize; i++){
-        tmp->setValue(tmp2[i]);
-        tmp=tmp->getNext();
-    }
-    
-    start->setValue(val);
 }
 
 //*******************************************************
@@ -212,8 +206,14 @@ void SimpleVector<T>::pop(){
     
     arraySize--;
     
-    while(tmp->getNext())
+    for(int i=0; i<arraySize; i++){
         tmp=tmp->getNext();
+        if(i==(arraySize-1)){
+            delete tmp->getNext();
+            tmp->setNext(NULL);
+        }
+    }
     delete tmp->getNext();
+            tmp->setNext(NULL);
 }
 #endif
