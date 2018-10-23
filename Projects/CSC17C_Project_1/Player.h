@@ -9,7 +9,7 @@
 
 //Included System Libraries
 #include <string>
-#include <vector>
+#include <list>
 
 //Included User Libraries
 #include "GameEntity.h"
@@ -21,8 +21,9 @@ using namespace std;
 class Player:public GameEntity{
     private:
         string name;
-        vector<int> hand;
+        list<int> hand;
         int inHand;
+        int maxHand;
     public:
         //Default Player Constructor
         Player();
@@ -43,7 +44,11 @@ class Player:public GameEntity{
         string getName()const{return name;}
         
         //Gets Index from Array of Indexes Given its Index in that Array
-        int getHand(int i)const{return hand[i];}
+        int getHand(int i){
+            list<int>::iterator it = hand.begin();
+            advance(it, i);
+            return *it;
+        }
         
         //Mutator Function for Setting Indexes
         void setHand(int,int);

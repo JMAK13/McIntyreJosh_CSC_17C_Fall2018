@@ -17,8 +17,8 @@ Player::Player(){
     isPl=true;
     name="Player Name";
     inHand=0;
-    hand.reserve(52);
-    for(int i=0; i<hand.capacity(); i++)
+    maxHand=52;
+    for(int i=0; i<maxHand; i++)
         hand.push_back(-1);
 }
 
@@ -27,8 +27,8 @@ Player::Player(string s){
     isPl=true;
     name=s;
     inHand=0;
-    hand.reserve(52);
-    for(int i=0; i<hand.capacity(); i++)
+    maxHand=52;
+    for(int i=0; i<maxHand; i++)
         hand.push_back(-1);
 }
 
@@ -46,31 +46,33 @@ Player::~Player(){
 
 //Index Mutator Member Function
 void Player::setHand(int i, int v){
-    if(i>=0) hand[i]=v;
+    list<int>::iterator it = hand.begin();
+    if(i>=0){
+        advance(it, i);
+        *it=v;
+    }
     else throw Player::BadIndex();
 }
 
-//Counts Indexes in Player's Hand Vector
+//Counts Indexes in Player's List
 int Player::cntHand(){
-    vector<int>::iterator it;
+    list<int>::iterator it;
     int count=0;
-    for(it=hand.begin(); it<hand.end(); it++)
+    for(it=hand.begin(); it!=hand.end(); ++it)
         if(*it>=0)count++;
         
     return count;
 }
 
-//Gets Index at Top of Player's Vector
+//Gets Index at Top of Player's List
 int Player::getTop(){
-    vector<int>::iterator it;
-    for(it=hand.begin(); it<hand.end(); it++)
-        if(*(it+1)==-1) return *it;
-    
+    for(int i=0; i<maxHand; i++)
+        if(getHand(i+1)==-1) return getHand(i);
 }
 
 //Sets Index at Top of Player's Vector to -1
 void Player::setTop(){
-    for(int i=0; i<hand.capacity(); i++){
+    for(int i=0; i<maxHand; i++){
         try{
             if(getHand(i+1)==-1) setHand(i,-1);
         }
@@ -82,15 +84,8 @@ void Player::setTop(){
 
 //Moves Top Card of Player's Hand to Bottom
 void Player::toBot(int c){
-    int tmp=hand.front(),tmp2;
-    for(int i=0; i<52; i++){
-        if(i==0) hand[i]=c;
-        else{
-            tmp2=hand[i];
-            hand[i]=tmp;
-            tmp=tmp2;
-        }
-    }
+    hand.push_front(hand.back());
+    hand.pop_back();
     try{
         setHand(0,c);
     }catch(Player::BadIndex){
