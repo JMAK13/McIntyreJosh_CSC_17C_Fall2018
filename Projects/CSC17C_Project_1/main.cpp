@@ -100,12 +100,13 @@ int main(int argc, char** argv) {
                 //Initialize Player Objects
                 Player p1(name1),p2(name2);
                 
+                
                 //Initializes Dealer Object
                 Dealer<Card> dlr;
-
+                
                 //Dealer Shuffle Deck
                 dlr.shuffle(d);
-
+               
                 //Initialize Deck Suits, Values, and the Dealer's Hand's Indexes
                 for(int i=0; i<d.numCards(); i++){
                     //Initialize Card Suits
@@ -119,7 +120,7 @@ int main(int argc, char** argv) {
                         cout<<"Invalid suit has been entered.\n";
                     }
                 }
-
+                
                 //Dealer Deals Cards to Players
                 dlr.dealCrds(p1,d,26);
                 dlr.dealCrds(p2,d,26);
