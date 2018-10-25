@@ -1,7 +1,7 @@
 /* 
  * File:   Player.cpp
  * Author: Josh McIntyre
- * Created on May 16, 2018, 1:28 PM
+* Created on October 25, 2018, 4:19 PM
  */
 
 //Included System Libraries
@@ -41,7 +41,7 @@ Player::Player(Player &player){
 
 //Player Destructor
 Player::~Player(){
-    
+    hand.clear();
 }
 
 //Index Mutator Member Function
@@ -58,8 +58,10 @@ void Player::setHand(int i, int v){
 int Player::cntHand(){
     list<int>::iterator it;
     int count=0;
-    for(it=hand.begin(); it!=hand.end(); ++it)
-        if(*it>=0)count++;
+    for(it=hand.begin(); it!=hand.end(); ++it){
+        if(count==52) return count;
+        else if((*it)>=0) count++;
+    }
         
     return count;
 }
@@ -84,11 +86,5 @@ void Player::setTop(){
 
 //Moves Top Card of Player's Hand to Bottom
 void Player::toBot(int c){
-    hand.push_front(hand.back());
-    hand.pop_back();
-    try{
-        setHand(0,c);
-    }catch(Player::BadIndex){
-        cout<<"Invalid index has been entered./n";
-    }
+    hand.push_front(c);
 }

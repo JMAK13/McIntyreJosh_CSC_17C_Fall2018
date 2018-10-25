@@ -1,7 +1,7 @@
 /* 
  * File:   AbstractCard.h
  * Author: Josh McIntyre
- * Created on May 14, 2018, 6:11 PM
+* Created on October 25, 2018, 4:19 PM
  */
 
 #ifndef ABSTRACTCARD_H

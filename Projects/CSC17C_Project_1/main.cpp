@@ -1,12 +1,12 @@
 /* 
  * File:   main.cpp
  * Author: Josh McIntyre
- * Created on May 9, 2018, 9:53 AM
+ * Created on October 25, 2018, 4:19 PM
  */
 
 //Global Constants
 
-//System Libraries
+//Included System Libraries
 #include <iostream>     //cout,endl,cin,getline
 #include <cctype>       //isalpha
 #include <fstream>      //fstream,write,read
@@ -14,15 +14,15 @@
 #include <ctime>        //time
 using namespace std;
 
-//User Libraries
+//Included User Libraries
 #include "Card.h"
 #include "Deck.h"
 #include "Player.h"
 #include "Dealer.h"
 
 //Function Prototypes
-void prntCrd(Deck<Card> &d,int);            //Prints a Card
-void war(Player &,Player &,Deck<Card> &);   //Initiates War Protocol
+void prntCrd(Deck &d,int);            //Prints a Card
+void war(Player &,Player &,Deck &);   //Initiates War Protocol
 
 //Main Function
 int main(int argc, char** argv) {
@@ -95,8 +95,7 @@ int main(int argc, char** argv) {
                 ans=' ';
                 
                 //Initialize Deck Object
-                Deck<Card> d;
-                
+                Deck d;
 
                 //Initialize Player Objects
                 Player p1(name1),p2(name2);
@@ -106,20 +105,6 @@ int main(int argc, char** argv) {
                 
                 //Dealer Shuffle Deck
                 dlr.shuffle(d);
-                cout<<"test"<<endl;
-                //Initialize Deck Suits, Values, and the Dealer's Hand's Indexes
-                for(int i=0; i<d.numCards(); i++){
-                    //Initialize Card Suits
-                    try{
-                        if(i>=0 &&i<=12) d.getCard(i)->setSuit("Spades");
-                        else if(i>=13&&i<=25) d.getCard(i)->setSuit("Clubs");
-                        else if(i>=26&&i<=38) d.getCard(i)->setSuit("Hearts");
-                        else if(i>=39&&i<=51) d.getCard(i)->setSuit("Diamonds");
-                    }
-                    catch(Card::InvalidSuit){
-                        cout<<"Invalid suit has been entered.\n";
-                    }
-                }
                 
                 //Dealer Deals Cards to Players
                 dlr.dealCrds(p1,d,26);
@@ -141,7 +126,7 @@ int main(int argc, char** argv) {
                         prntCrd(d,p2.getTop());
                         
                     //If Player 1's Card Is Greater
-                    if(*d.getCard(p1.getTop()) > *d.getCard(p2.getTop())) {
+                    if(d.getCard(p1.getTop()) > d.getCard(p2.getTop())) {
                         cout<<name1<<"(Player 1) wins this round!"<<endl;
                         p1.toBot(p1.getTop());
                         p1.toBot(p2.getTop());
@@ -150,7 +135,7 @@ int main(int argc, char** argv) {
                     }
                         
                     //If Player 2's Card is Greater
-                    else if(*d.getCard(p1.getTop()) < *d.getCard(p2.getTop())) {
+                    else if(d.getCard(p1.getTop()) < d.getCard(p2.getTop())) {
                         cout<<name2<<"(Player 2) wins this round!"<<endl;
                         p2.toBot(p2.getTop());
                         p2.toBot(p1.getTop());
@@ -159,7 +144,7 @@ int main(int argc, char** argv) {
                     }
                         
                     //If Both Players Card's Have Same Value
-                    else if(*d.getCard(p1.getTop()) == *d.getCard(p2.getTop())){
+                    else if(d.getCard(p1.getTop()) == d.getCard(p2.getTop())){
                         cout<<"War has been initiated!"<<endl;
                         war(p1,p2,d);
                     }
@@ -187,7 +172,7 @@ int main(int argc, char** argv) {
                 file.close();
 
                 //Asks If Users Would Like to Player Again
-                cout<<"Would you like to play again? [Y/N]";
+                cout<<"Would you have fun? [Y/N]";
                 cin>>ans;
 
             }while(toupper(ans)=='Y');
@@ -205,12 +190,12 @@ int main(int argc, char** argv) {
 }
 
 //Prints a Card
-void prntCrd(Deck<Card> &d, int n){
-    if(n>=0)cout<<d.getCard(n)->getName(d.getCard(n)->getVal())<<" of "<<d.getCard(n)->getSuit()<<endl;
+void prntCrd(Deck &d, int n){
+    if(n>=0)cout<<d.getCard(n).getName(d.getCard(n).getVal())<<" of "<<d.getCard(n).getSuit()<<endl;
 }
 
 //Initiates 'war' Protocol
-void war(Player &p1, Player &p2, Deck<Card> &d){
+void war(Player &p1, Player &p2, Deck &d){
     int wars=1;
     bool end=false;
     
@@ -241,7 +226,7 @@ void war(Player &p1, Player &p2, Deck<Card> &d){
             prntCrd(d,crd2);
             
         //If Player 1's Card is Higher
-        if(*d.getCard(crd1) > *d.getCard(crd2)){
+        if(d.getCard(crd1) > d.getCard(crd2)){
             for(int j=0; j<(wars*2)+1; j++){
                 p1.toBot(p1.getTop());
                 p1.toBot(p2.getTop());
@@ -253,7 +238,7 @@ void war(Player &p1, Player &p2, Deck<Card> &d){
         }
             
         //If Player 2's Card is Higher
-        else if(*d.getCard(crd1) < *d.getCard(crd2)){
+        else if(d.getCard(crd1) < d.getCard(crd2)){
             for(int j=0; j<(wars*2)+1; j++){
                 p2.toBot(p2.getTop());
                 p2.toBot(p1.getTop());
@@ -265,7 +250,7 @@ void war(Player &p1, Player &p2, Deck<Card> &d){
         }
             
         //If Both Players Placed Down Cards of the Same Value
-        else if(*d.getCard(crd1) == *d.getCard(crd2)){
+        else if(d.getCard(crd1) == d.getCard(crd2)){
             wars++;
         }
     }while(!end);

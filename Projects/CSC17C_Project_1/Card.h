@@ -1,7 +1,7 @@
 /* 
  * File:   Card.h
  * Author: Josh McIntyre
- * Created on May 9, 2018, 10:23 AM
+* Created on October 25, 2018, 4:19 PM
  */
 
 #ifndef CARD_H
@@ -31,7 +31,7 @@ class Card:public AbstractCard{
         ~Card();
         
         //Suit Accessor Member Function
-        virtual string getSuit()const override{return data.second;}
+        virtual string getSuit()const override{return this->data.second;}
         
         //Value Accessor Member Function
         virtual int getVal()const override{return data.first;}

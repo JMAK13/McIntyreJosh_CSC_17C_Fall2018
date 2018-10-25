@@ -1,28 +1,27 @@
 /* 
  * File:   Deck.h
  * Author: Josh McIntyre
- * Created on May 14, 2018, 6:15 PM
+* Created on October 25, 2018, 4:19 PM
  */
 
 #ifndef DECK_H
 #define DECK_H
 
-//Include System Libraries
+//Included System Libraries
 #include <vector>
 #include <map>
 #include <iterator>
 #include <iostream>
 using namespace std;
 
+//Included User Libraries
 #include "Card.h"
 
-//Deck Templated Class
-template <class T>
+//Deck Class
 class Deck{
     private:
-        T **card;
         vector<int> index;
-        map<Card,int,Comparator> data;   //NEW
+        map<Card,int,Comparator> data;
         static const int nCards=52;
         int delt;
     public:
@@ -33,13 +32,11 @@ class Deck{
         ~Deck();
         
         //Card Accessor Member Function
-        //T *getCard(int i)const{return card[i];}
-        Card *getCard(int i);  //NEW
+        Card getCard(int i);
         
         
         //Card Index Accessor Member Function
-        //int getI(int i)const{return index[i];}
-        int getI(int);  //NEW
+        int getI(int i)const{return index[i];}
         
         //Card Index Mutator Member Function
         void setI(int,int);
@@ -59,73 +56,5 @@ class Deck{
         class InvalidIndex
             {   };
 };
-
-//Default Deck Constructor
-template <class T>
-Deck<T>::Deck(){
-    //Sets Default Variable Values
-    /*card=new T*[nCards];
-    delt=0;
-    //Allocates Memory for Cards
-    for(int i=0; i<nCards; i++){
-        card[i]=new T(i+1);
-        index.push_back(i);
-    }*/
-    
-    //NEW
-    for(int i=0; i<nCards; i++)
-        data[Card(i+1)]=i;
-}
-
-//Deck Destructor
-template <class T>
-Deck<T>::~Deck(){
-    //Deallocates Memory
-    /*for(int i=0; i<nCards; i++)
-        delete card[i];
-        
-    delete []card;*/
-    
-    //NEW
-    data.clear();
-}
-
-//Index Mutator Member Function
-template <class T>
-void Deck<T>::setI(int i, int v){
-    //if(i>=0&&v>=0) index[i]=v;
-    //else throw InvalidIndex();
-    
-    //NEW
-    if(i>=0&&v>=0){
-        map<Card,int>::iterator it;
-        
-        for(it=data.begin(); it!=data.end(); ++it){
-            if(it->second==i) it->second=v;
-        }
-    }
-    else throw InvalidIndex();
-}
-
-//NEW
-template <class T>
-int Deck<T>::getI(int i){
-    map<Card,int>::iterator it;
-    int x=0;
-    for(it=data.begin(); it!=data.end(); ++it){
-        if(x==i) return it->second;
-        else x++;
-    }
-}
-
-template <class T>
-Card *Deck<T>::getCard(int i){
-    map<Card,int>::iterator it;
-    int x=0;
-    for(it=data.begin(); it!=data.end(); ++it){
-        //if(x==i) return it->first;
-        //else x++;
-    }
-}
 #endif /* DECK_H */
 

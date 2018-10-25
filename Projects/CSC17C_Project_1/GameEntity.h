@@ -1,7 +1,7 @@
 /* 
  * File:   GameEntity.h
  * Author: Josh McIntyre
- * Created on May 18, 2018, 10:29 AM
+* Created on October 25, 2018, 4:19 PM
  */
 
 #ifndef GAMEENTITY_H
