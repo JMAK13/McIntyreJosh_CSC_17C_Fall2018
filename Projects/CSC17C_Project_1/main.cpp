@@ -96,17 +96,17 @@ int main(int argc, char** argv) {
                 
                 //Initialize Deck Object
                 Deck<Card> d;
+                
 
                 //Initialize Player Objects
                 Player p1(name1),p2(name2);
-                
                 
                 //Initializes Dealer Object
                 Dealer<Card> dlr;
                 
                 //Dealer Shuffle Deck
                 dlr.shuffle(d);
-               
+                cout<<"test"<<endl;
                 //Initialize Deck Suits, Values, and the Dealer's Hand's Indexes
                 for(int i=0; i<d.numCards(); i++){
                     //Initialize Card Suits

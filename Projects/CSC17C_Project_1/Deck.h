@@ -12,8 +12,9 @@
 #include <map>
 #include <iterator>
 #include <iostream>
-#include <utility>
 using namespace std;
+
+#include "Card.h"
 
 //Deck Templated Class
 template <class T>
@@ -21,7 +22,7 @@ class Deck{
     private:
         T **card;
         vector<int> index;
-        map<T,int> data;   //NEW
+        map<Card,int,Comparator> data;   //NEW
         static const int nCards=52;
         int delt;
     public:
@@ -33,7 +34,7 @@ class Deck{
         
         //Card Accessor Member Function
         //T *getCard(int i)const{return card[i];}
-        T *getCard(int i);  //NEW
+        Card *getCard(int i);  //NEW
         
         
         //Card Index Accessor Member Function
@@ -72,14 +73,8 @@ Deck<T>::Deck(){
     }*/
     
     //NEW
-    for(int i=0; i<nCards; i++){
-        data[T(i+1)]=i;
-    }
-    
-    typename map<T,int>::iterator it;
-
-    for(it=data.begin(); it!=data.end(); ++it)
-        cout<<it->first<<"   "<<it->second<<endl;
+    for(int i=0; i<nCards; i++)
+        data[Card(i+1)]=i;
 }
 
 //Deck Destructor
@@ -103,7 +98,7 @@ void Deck<T>::setI(int i, int v){
     
     //NEW
     if(i>=0&&v>=0){
-        typename map<T,int>::iterator it=data.begin();
+        map<Card,int>::iterator it;
         
         for(it=data.begin(); it!=data.end(); ++it){
             if(it->second==i) it->second=v;
@@ -115,7 +110,7 @@ void Deck<T>::setI(int i, int v){
 //NEW
 template <class T>
 int Deck<T>::getI(int i){
-    typename map<T,int>::iterator it;
+    map<Card,int>::iterator it;
     int x=0;
     for(it=data.begin(); it!=data.end(); ++it){
         if(x==i) return it->second;
@@ -124,12 +119,12 @@ int Deck<T>::getI(int i){
 }
 
 template <class T>
-T *Deck<T>::getCard(int i){
-    typename map<T,int>::iterator it;
+Card *Deck<T>::getCard(int i){
+    map<Card,int>::iterator it;
     int x=0;
     for(it=data.begin(); it!=data.end(); ++it){
-        if(x==i) return it->first;
-        else x++;
+        //if(x==i) return it->first;
+        //else x++;
     }
 }
 #endif /* DECK_H */

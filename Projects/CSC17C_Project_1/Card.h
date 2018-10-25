@@ -16,6 +16,7 @@ using namespace std;
 class Card:public AbstractCard{
     private:
         pair<int,string> data;
+        int serial;
     public:
         //Empty Constructor
         Card();
@@ -24,7 +25,7 @@ class Card:public AbstractCard{
         Card(int);
         
         //Card Copy Constructor
-        Card(Card &);
+        Card(const Card &);
         
         //Destructor
         ~Card();
@@ -40,6 +41,12 @@ class Card:public AbstractCard{
         
         //Value Mutator Member Function
         void setVal(int);
+        
+        //Serial Mutator Member Function
+        void setS(int s){serial=s;}
+        
+        //Serial Mutator Member Function
+        int getS()const{return serial;}
         
         //Overloaded > Function
         bool operator > (const Card &right);
@@ -60,6 +67,13 @@ class Card:public AbstractCard{
         //Negative Value
         class NegativeValue
             {   };
+};
+
+class Comparator {
+public:
+    bool operator()(const Card& c1, const Card& c2){
+        return c1.getS() < c2.getS();
+    }
 };
 
 #endif /* CARD_H */

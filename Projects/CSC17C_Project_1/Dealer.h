@@ -11,6 +11,9 @@
 #include "GameEntity.h"
 #include "Player.h"
 
+#include <iostream>
+using namespace std;
+
 //Dealer Template Class
 template <class T>
 class Dealer:public GameEntity{
@@ -68,8 +71,10 @@ void Dealer<T>::shuffle(Deck<T> &d){
         for(int i=0; i<d.numCards(); i++){
             int random=rand()%d.numCards();
             int temp=d.getI(i);
+            cout<<"test1"<<endl;
             d.setI(i,d.getI(random));
             d.setI(random,temp);
+            cout<<"test2"<<endl;
         }
     }
 }

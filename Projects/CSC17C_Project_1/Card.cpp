@@ -21,12 +21,14 @@ Card::Card(int v) : AbstractCard(){
     if(v<0) throw Card::NegativeValue();
     if(v<=13&&v>=1) data.first=v;
     else {v%=13; v==0?data.first=13:data.first=v;}
+    serial=v;
 }
 
 //Card Copy Constructor
-Card::Card(Card &card){
+Card::Card(const Card &card){
     data.second=card.data.second;
     data.first=card.data.first;
+    serial=card.serial;
 }
 
 //Card Destructor
@@ -48,6 +50,7 @@ void Card::setVal(int v){
     if(v<0) throw Card::NegativeValue();
     if(v<=13&&v>=1) data.first=v;
     else {v%=13; v==0?data.first=13:data.first=v;}
+    serial=v;
 }
 
 //Name Accessor Member Function
@@ -55,18 +58,19 @@ string Card::getName(int v){
     if(v<1) throw Card::NegativeValue();
     string s;
     if(v==1)s="Ace";
-    else if(v==2)s="Two";
-    else if(v==3)s="Three";
-    else if(v==4)s="Four";
-    else if(v==5)s="Five";
-    else if(v==6)s="Six";
-    else if(v==7)s="Seven";
-    else if(v==8)s="Eight";
-    else if(v==9)s="Nine";
-    else if(v==10)s="Ten";
-    else if(v==11)s="Jack";
-    else if(v==12)s="Queen";
-    else if(v==13)s="King";
+    else if(v==2)s="Two of ";
+    else if(v==3)s="Three of ";
+    else if(v==4)s="Four of ";
+    else if(v==5)s="Five of ";
+    else if(v==6)s="Six of ";
+    else if(v==7)s="Seven of ";
+    else if(v==8)s="Eight of ";
+    else if(v==9)s="Nine of ";
+    else if(v==10)s="Ten of ";
+    else if(v==11)s="Jack of ";
+    else if(v==12)s="Queen of ";
+    else if(v==13)s="King of ";
+    s+=data.second;
     return s;
 }
 
